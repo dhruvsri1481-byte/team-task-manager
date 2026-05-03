@@ -9,13 +9,16 @@ connectDB();
 const app = express();
 
 // ==============================
-// ✅ FINAL CORS (WORKING)
+// ✅ FINAL CORS (PROPER FIX)
 // ==============================
 app.use(cors({
-origin: "*", // sab allow (fastest fix)
-methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+origin: "*",
+methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
 allowedHeaders: ["Content-Type", "Authorization"],
 }));
+
+// 🔥 IMPORTANT: Handle preflight requests
+app.options('*', cors());
 
 // ==============================
 // MIDDLEWARE
